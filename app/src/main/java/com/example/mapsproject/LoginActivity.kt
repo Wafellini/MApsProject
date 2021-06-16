@@ -4,9 +4,11 @@ package com.example.mapsproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
 
     lateinit var register_intent: TextView
@@ -17,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        actionBar?.hide()
+        supportActionBar?.hide()
 
         register_intent = findViewById(R.id.register_intent)
         login_submit = findViewById(R.id.login_submit)

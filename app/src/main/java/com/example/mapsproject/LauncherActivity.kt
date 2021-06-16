@@ -40,13 +40,15 @@ class LauncherActivity : AppCompatActivity() {
         bot = findViewById(R.id.iv_bot)
 
         initAnimation()
+
+         openLoginActivity()
     }
 
-//    fun openMainActivity() {
-//        val intent = Intent(this, MainActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
+    fun openLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
     fun initAnimation(){
         val topAnim: Animation = AnimationUtils.loadAnimation(this,R.anim.top_wave)
