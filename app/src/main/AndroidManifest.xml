@@ -15,15 +15,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m"
         tools:ignore="AllowBackup">
-        <activity android:name=".LauncherActivity">
+        <activity android:name=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.LoginActivity">
         </activity>
 
         <meta-data
@@ -33,7 +33,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MapActivity">
+        <activity android:name=".activity.MapActivity">
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyDyWOogYGlm4WhNOtELW1_17aFkOITxzvQ" />

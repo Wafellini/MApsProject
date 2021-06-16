@@ -1,4 +1,4 @@
-package com.example.mapsproject
+package com.example.mapsproject.activity
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
@@ -12,6 +12,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.mapsproject.R
 import kotlin.properties.Delegates
 
 @Suppress("DEPRECATION")
@@ -51,7 +52,7 @@ class LauncherActivity : AppCompatActivity() {
     }
 
     fun initAnimation(){
-        val topAnim: Animation = AnimationUtils.loadAnimation(this,R.anim.top_wave)
+        val topAnim: Animation = AnimationUtils.loadAnimation(this, R.anim.top_wave)
         top.animation = topAnim
 
         val objectAnimator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(
@@ -66,7 +67,7 @@ class LauncherActivity : AppCompatActivity() {
 
         animateText("MApp")
 
-        val botAnim: Animation = AnimationUtils.loadAnimation(this,R.anim.bot_wave)
+        val botAnim: Animation = AnimationUtils.loadAnimation(this, R.anim.bot_wave)
         bot.animation = botAnim
     }
 

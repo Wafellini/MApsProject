@@ -1,5 +1,4 @@
-//https://captaindroid.com/nice-login-ui-design-in-android/
-package com.example.mapsproject
+package com.example.mapsproject.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import com.example.mapsproject.R
+import com.example.mapsproject.data.DBHelper
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
@@ -34,7 +35,19 @@ class LoginActivity : AppCompatActivity() {
         }
 
         login_submit.setOnClickListener{
-            //verifyUser(login.text.toString(),pass.text.toString())
+            verifyUser(login.text.toString(),pass.text.toString())
         }
+    }
+
+    fun verifyUser(login: String, password: String) {
+        val method = "login"
+        val dbHelper = DBHelper(this)
+        dbHelper.execute(method, login, password)
+    }
+
+    fun openMainActivity() {
+        val intent = Intent(this, MapActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

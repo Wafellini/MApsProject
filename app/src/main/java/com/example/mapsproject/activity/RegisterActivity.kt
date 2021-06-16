@@ -1,8 +1,9 @@
-package com.example.mapsproject
+package com.example.mapsproject.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.mapsproject.R
 
 @Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
