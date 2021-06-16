@@ -13,7 +13,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
-//import com.google.maps.example.R
 
 @Suppress("DEPRECATION")
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {

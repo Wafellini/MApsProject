@@ -13,18 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MApsProject"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m"
-        tools:ignore="AllowBackup">
-        <activity android:name=".activity.LauncherActivity">
+        tools:ignore="AllowBackup"
+        tools:targetApi="m">
+        <activity
+            android:name=".activity.LauncherActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.LoginActivity">
-        </activity>
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -33,7 +38,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activity.MapActivity">
+        <activity
+            android:name=".activity.MapActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyDyWOogYGlm4WhNOtELW1_17aFkOITxzvQ" />
