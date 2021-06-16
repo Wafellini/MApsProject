@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="m">
+        <activity android:name=".activity.MainActivity"></activity>
         <activity
             android:name=".activity.LauncherActivity"
             android:screenOrientation="portrait">
