@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.mapsproject.activity.LauncherActivity
 import com.example.mapsproject.activity.LoginActivity
 import com.example.mapsproject.activity.MapActivity
+import com.example.mapsproject.activity.RegisterActivity
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -29,6 +30,7 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
         if (method == "register") {
             val name = params[1]
             val password = params[2]
+            lateinit var response: String
             val reg_url = "https://192.168.0.15/mapp/register.php"
             try {
                 val url = URL(reg_url)
@@ -51,8 +53,17 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
                 bufferedWriter.close()
                 os.close()
                 val `is`: InputStream = httpURLConnection.inputStream
+                val bufferedReader = BufferedReader(InputStreamReader(`is`))
+
+                try {
+                    while ((bufferedReader.readLine().also { response = it }) != null) {
+                    }
+                } catch (e: Exception) {
+                }
+
+                bufferedReader.close()
                 `is`.close()
-                return "Registration success"
+                return response
             } catch (e: MalformedURLException) {
                 e.printStackTrace()
             } catch (e: IOException) {
@@ -115,8 +126,11 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
             activity.openMainActivity()
         } else if (method == "login" && result == "Error") {
             Toast.makeText(activity.applicationContext, "Error", Toast.LENGTH_SHORT).show()
-        } else if (method == "register") {
+        } else if (method == "register" && result == "Success" && activity is RegisterActivity) {
             Toast.makeText(activity.applicationContext, "Success", Toast.LENGTH_SHORT).show()
+            activity.openLoginActivity()
+        } else if (method == "register" && result == "Error") {
+            Toast.makeText(activity.applicationContext, "Database Error", Toast.LENGTH_SHORT).show()
         }
     }
 

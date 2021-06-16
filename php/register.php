@@ -8,10 +8,10 @@ $u_password=$_POST["password"];
 $sql_query="insert into users(login,password) values('$u_name','$u_password');";
 
 if(mysqli_query($connection,$sql_query)){
-    echo "Data inserted";
+    echo "Success";
 }
 else{
-    echo "Insertion error";
+    echo "Error";
 }
 mysqli_close($connection);
 ?>
