@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import com.example.mapsproject.R
+import com.example.mapsproject.data.Country
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -39,5 +40,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    companion object{
+        val COUNTRIES = ArrayList<Country>()
     }
 }

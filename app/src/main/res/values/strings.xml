@@ -8,4 +8,5 @@
     <string name="mapp">MApp</string>
     <string name="repeat_password">Repeat password</string>
     <string name="play">PLAY</string>
+    <string name="show_marker">Show Marker</string>
 </resources>

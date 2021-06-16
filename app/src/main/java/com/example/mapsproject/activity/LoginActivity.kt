@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         login_submit.setOnClickListener{
+            login_submit.isEnabled = false
             verifyUser(login.text.toString(),pass.text.toString())
         }
     }

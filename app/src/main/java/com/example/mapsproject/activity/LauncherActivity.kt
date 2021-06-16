@@ -3,7 +3,9 @@ package com.example.mapsproject.activity
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +15,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.mapsproject.R
+import com.example.mapsproject.data.APIHelper
 import kotlin.properties.Delegates
 
 @Suppress("DEPRECATION")
@@ -42,7 +45,16 @@ class LauncherActivity : AppCompatActivity() {
 
         initAnimation()
 
-         openLoginActivity()
+        val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val ni = manager.activeNetworkInfo
+        val connected = ni != null && ni.isConnected
+        if (connected) {
+            val api = APIHelper(this)
+            api.execute()
+        } else {
+            finish()
+        }
     }
 
     fun openLoginActivity() {
@@ -51,14 +63,14 @@ class LauncherActivity : AppCompatActivity() {
         finish()
     }
 
-    fun initAnimation(){
+    fun initAnimation() {
         val topAnim: Animation = AnimationUtils.loadAnimation(this, R.anim.top_wave)
         top.animation = topAnim
 
         val objectAnimator: ObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(
             icMap,
-            PropertyValuesHolder.ofFloat("scaleX",1.2f),
-            PropertyValuesHolder.ofFloat("scaleY",1.2f)
+            PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+            PropertyValuesHolder.ofFloat("scaleY", 1.2f)
         )
         objectAnimator.duration = 500
         objectAnimator.repeatCount = ValueAnimator.INFINITE
@@ -73,19 +85,19 @@ class LauncherActivity : AppCompatActivity() {
 
     private val runnable = object : Runnable {
         override fun run() {
-            lantext.text = chSequence.subSequence(0,id++)
-            if (id <= chSequence.length){
-                handler.postDelayed(this,delay)
+            lantext.text = chSequence.subSequence(0, id++)
+            if (id <= chSequence.length) {
+                handler.postDelayed(this, delay)
             }
         }
     }
 
-    fun animateText(cs: CharSequence){
+    fun animateText(cs: CharSequence) {
         chSequence = cs
         id = 0
         lantext.text = ""
         handler.removeCallbacks(runnable)
-        handler.postDelayed(runnable,delay)
+        handler.postDelayed(runnable, delay)
     }
 
 }

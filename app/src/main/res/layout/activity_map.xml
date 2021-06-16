@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,11 +9,94 @@
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
         tools:context=".activity.MapActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
         tools:ignore="RedundantNamespace" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/show_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:alpha="0.7"
+        android:padding="10dp"
+        android:text="@string/show_marker"
+        android:textAllCaps="false"
+        app:backgroundTint="#808080" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="-10dp">
+
+            <Button
+                android:id="@+id/c1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:alpha="0.7"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                app:autoSizeTextType="uniform"
+                app:backgroundTint="#808080" />
+
+            <Button
+                android:id="@+id/c2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:alpha="0.7"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                app:autoSizeTextType="uniform"
+                app:backgroundTint="#808080" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="-10dp">
+
+            <Button
+                android:id="@+id/c3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:alpha="0.7"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                app:autoSizeTextType="uniform"
+                app:backgroundTint="#808080" />
+
+            <Button
+                android:id="@+id/c4"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:alpha="0.7"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                app:autoSizeTextType="uniform"
+                app:backgroundTint="#808080" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

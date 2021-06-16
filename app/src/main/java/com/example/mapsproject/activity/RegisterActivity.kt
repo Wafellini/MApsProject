@@ -39,6 +39,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         register_submit.setOnClickListener{
+            register_submit.isEnabled = false
             insertUser(login.text.toString(),pass.text.toString(),pass2.text.toString())
         }
     }
