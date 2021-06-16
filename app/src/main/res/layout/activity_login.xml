@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-1dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_top"
+            app:srcCompat="@drawable/ic_top"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
@@ -43,7 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/ic_map" />
+                        app:srcCompat="@drawable/ic_map" />
 
                     <TextView
                         android:id="@+id/lan_text"
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="@string/mapp"
-                        android:textColor="#44AF69"
+                        android:textColor="@color/green_my"
                         android:textSize="48sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -160,7 +160,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="-1dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_bot"
+            app:srcCompat="@drawable/ic_bot"
             tools:ignore="ContentDescription" />
     </RelativeLayout>
 
