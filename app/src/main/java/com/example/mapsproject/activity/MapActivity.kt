@@ -1,14 +1,24 @@
 package com.example.mapsproject.activity
 
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.mapsproject.R
 import com.example.mapsproject.activity.MainActivity.Companion.COUNTRIES
 import com.example.mapsproject.data.Country
@@ -16,8 +26,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import java.lang.Exception
+import kotlin.math.roundToLong
 import kotlin.properties.Delegates
 
 
@@ -40,6 +51,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var pointsTV: TextView
     lateinit var mistakesTV: TextView
+    lateinit var dist: TextView
+    lateinit var line: Polyline
+
+    var myLocation: LatLng = LatLng(0.0, 0.0)
+    lateinit var mymarker: Marker
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +67,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         pointsTV = findViewById(R.id.points)
         mistakesTV = findViewById(R.id.mistakes)
+        dist = findViewById(R.id.dist)
 
         pointsTV.text = "Points: $points"
         mistakesTV.text = "Mistakes: $mistakes"
@@ -62,6 +79,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         initMarkerButton()
+        initHintButton()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -78,7 +96,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         marker = mMap.addMarker(
             MarkerOptions()
                 .position(randCountry.coords)
-                .title("Marker in ${randCountry.name}")
         )
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(randCountry.coords))
@@ -159,42 +176,110 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     i.setBackgroundColor(resources.getColor(R.color.gray))
                 }
                 marker.remove()
+                dist.text = ""
+                try {
+                    mymarker.remove()
+                    line.remove()
+                } catch (e: Exception){}
                 runGame()
             },
             2000
         )
     }
 
-    private fun checkMistakes(){
-        if (mistakes >= 3){
+    private fun checkMistakes() {
+        if (mistakes >= 3) {
             endGame()
         }
     }
 
-    private fun endGame(){
+    private fun endGame() {
         Handler().postDelayed(
             {
+                saveScore()
                 openMainAcitvity()
             },
             2000
         )
     }
 
-    private fun openMainAcitvity(){
+    private fun openMainAcitvity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     @SuppressLint("SetTextI18n")
-    private fun addPoints(){
+    private fun addPoints() {
         points += 5
         pointsTV.text = "Points: $points"
     }
 
     @SuppressLint("SetTextI18n")
-    private fun subPoints(){
-        points -= 5
+    private fun subPoints() {
+        points -= 0
         pointsTV.text = "Points: $points"
+    }
+
+    fun saveScore() {
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun initHintButton() {
+        val hint = findViewById<Button>(R.id.hint)
+        hint.setOnClickListener {
+            handleMyPosition()
+
+            try {
+                mymarker.remove()
+            }catch (e: Exception){}
+
+            if (myLocation != LatLng(0.0, 0.0)){
+                mymarker = mMap.addMarker(
+                    MarkerOptions()
+                        .position(myLocation)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                )
+                line = mMap.addPolyline(PolylineOptions().add(myLocation, randCountry.coords)
+                    .width(7f).color(Color.RED))
+
+                val l1 = Location("")
+                l1.latitude = myLocation.latitude
+                l1.longitude = myLocation.longitude
+
+                val l2 = Location("")
+                l2.latitude = randCountry.coords.latitude
+                l2.longitude = randCountry.coords.longitude
+
+                val d = (l1.distanceTo(l2) / 100.0).roundToLong()
+                dist.text = "Distance: ${d}km"
+            }
+        }
+    }
+
+    fun handleMyPosition() {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        try {
+            locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                0L,
+                0f,
+                locationListener
+            )
+        } catch (ex: SecurityException) {
+            Toast.makeText(applicationContext, "No location available", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    private val locationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            myLocation = LatLng(location.latitude, location.longitude)
+        }
+
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
     }
 }

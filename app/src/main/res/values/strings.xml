@@ -9,4 +9,5 @@
     <string name="repeat_password">Repeat password</string>
     <string name="play">PLAY</string>
     <string name="show_marker">Show Marker</string>
+    <string name="hint">Hint</string>
 </resources>

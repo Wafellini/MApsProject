@@ -17,36 +17,69 @@
         tools:ignore="RedundantNamespace" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="right"
         android:orientation="vertical"
         android:padding="5dp">
 
         <Button
-            android:id="@+id/show_marker"
+            android:id="@+id/hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.7"
             android:padding="10dp"
-            android:text="@string/show_marker"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="192dp"
+            android:text="@string/hint"
             android:textAllCaps="false"
             app:backgroundTint="@color/gray" />
 
         <TextView
-            android:id="@+id/points"
+            android:id="@+id/dist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.7"
-            android:textColor="@color/green_my" />
+            android:textColor="#53B4DC" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/mistakes"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.7"
-            android:textColor="@color/red_my" />
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/show_marker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:padding="10dp"
+                android:text="@string/show_marker"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/gray" />
+
+            <TextView
+                android:id="@+id/points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:textColor="@color/green_my" />
+
+            <TextView
+                android:id="@+id/mistakes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:textColor="@color/red_my" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

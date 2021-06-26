@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.fragment.app.FragmentContainerView
 import com.example.mapsproject.R
 import com.example.mapsproject.data.Country
+import com.example.mapsproject.data.User
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     lateinit var play: LinearLayout
     lateinit var out: LinearLayout
+    lateinit var profile: LinearLayout
+    lateinit var profile_data: FragmentContainerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,12 +28,19 @@ class MainActivity : AppCompatActivity() {
 
         play = findViewById(R.id.play)
         out = findViewById(R.id.out)
+        profile = findViewById(R.id.profile)
+        profile_data = findViewById(R.id.profile_data)
+
+        USER = User(intent.getStringExtra("login")!!)
 
         play.setOnClickListener{
             openMapActivity()
         }
         out.setOnClickListener{
             openLoginActivity()
+        }
+        profile.setOnClickListener {
+            showHideProfile()
         }
     }
 
@@ -42,7 +54,16 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    fun showHideProfile(){
+        if (profile_data.visibility == View.GONE){
+            profile_data.visibility = View.VISIBLE
+        } else{
+            profile_data.visibility = View.GONE
+        }
+    }
+
     companion object{
         val COUNTRIES = ArrayList<Country>()
+        lateinit var USER: User
     }
 }

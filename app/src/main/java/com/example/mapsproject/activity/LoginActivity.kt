@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun openMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("login",login.text.toString())
         startActivity(intent)
         finish()
     }
