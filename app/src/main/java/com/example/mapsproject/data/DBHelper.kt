@@ -25,13 +25,14 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
     @SuppressLint("StaticFieldLeak")
     lateinit var method: String
     lateinit var username: String
+    val ip = "https://192.168.0.19/mapp/"
     override fun doInBackground(vararg params: String?): String? {
         method = params[0].toString()
         if (method == "register") {
             val name = params[1]
             val password = params[2]
             lateinit var response: String
-            val reg_url = "https://192.168.0.19/mapp/register.php"
+            val reg_url = ip+"register.php"
             try {
                 val url = URL(reg_url)
                 HttpsTrustManager.allowAllSSL()
@@ -74,7 +75,7 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
             username = name.toString()
             val password = params[2]
             lateinit var response: String
-            val log_url = "https://192.168.0.19/mapp/login.php"
+            val log_url = ip+"login.php"
             try {
                 val url = URL(log_url)
                 HttpsTrustManager.allowAllSSL()
@@ -116,6 +117,39 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
                 e.printStackTrace()
             }
 
+        } else if (method == "insert score") {
+            val login = params[1]
+            val score = params[2]
+            val res_url = ip+"insertscore.php"
+            try {
+                val url = URL(res_url)
+                HttpsTrustManager.allowAllSSL()
+                val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
+                httpURLConnection.requestMethod = "POST"
+                httpURLConnection.doOutput = true
+                val os: OutputStream = httpURLConnection.outputStream
+                val bufferedWriter = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
+                val data: String =
+                    URLEncoder.encode("login", "UTF-8").toString() + "=" + URLEncoder.encode(
+                        login, "UTF-8"
+                    ) + "&" +
+                            URLEncoder.encode("score", "UTF-8")
+                                .toString() + "=" + URLEncoder.encode(
+                        score, "UTF-8"
+                    )
+
+                bufferedWriter.write(data)
+                bufferedWriter.flush()
+                bufferedWriter.close()
+                os.close()
+                val `is`: InputStream = httpURLConnection.inputStream
+                `is`.close()
+                return "Success"
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
         return null
     }

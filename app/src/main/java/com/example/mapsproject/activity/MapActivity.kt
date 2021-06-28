@@ -21,7 +21,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.mapsproject.R
 import com.example.mapsproject.activity.LauncherActivity.Companion.COUNTRIES
+import com.example.mapsproject.activity.LoginActivity.Companion.USER
 import com.example.mapsproject.data.Country
+import com.example.mapsproject.data.DBHelper
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -196,7 +198,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun endGame() {
         Handler().postDelayed(
             {
-                saveScore()
+                insertScore()
                 openMainAcitvity()
             },
             2000
@@ -221,8 +223,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         pointsTV.text = "Points: $points"
     }
 
-    fun saveScore() {
-
+    fun insertScore() {
+        val method = "insert score"
+        val dbHelper = DBHelper(this)
+        dbHelper.execute(method, USER.login, points.toString())
     }
 
     @SuppressLint("SetTextI18n")
