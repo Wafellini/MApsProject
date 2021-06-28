@@ -31,7 +31,7 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
             val name = params[1]
             val password = params[2]
             lateinit var response: String
-            val reg_url = "https://192.168.0.20/mapp/register.php"
+            val reg_url = "https://192.168.0.19/mapp/register.php"
             try {
                 val url = URL(reg_url)
                 HttpsTrustManager.allowAllSSL()
@@ -74,7 +74,7 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
             username = name.toString()
             val password = params[2]
             lateinit var response: String
-            val log_url = "https://192.168.0.20/mapp/login.php"
+            val log_url = "https://192.168.0.19/mapp/login.php"
             try {
                 val url = URL(log_url)
                 HttpsTrustManager.allowAllSSL()

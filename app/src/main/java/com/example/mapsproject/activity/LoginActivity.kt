@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.mapsproject.R
 import com.example.mapsproject.data.DBHelper
+import com.example.mapsproject.data.User
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
@@ -16,6 +17,10 @@ class LoginActivity : AppCompatActivity() {
     lateinit var login_submit: TextView
     lateinit var login: EditText
     lateinit var pass: EditText
+
+    companion object{
+        lateinit var USER: User
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun openMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("login",login.text.toString())
+        USER = User(login.text.toString())
         startActivity(intent)
         finish()
     }

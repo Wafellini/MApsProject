@@ -2,7 +2,7 @@ package com.example.mapsproject.data
 
 import android.os.AsyncTask
 import com.example.mapsproject.activity.LauncherActivity
-import com.example.mapsproject.activity.MainActivity.Companion.COUNTRIES
+import com.example.mapsproject.activity.LauncherActivity.Companion.COUNTRIES
 import com.google.android.gms.maps.model.LatLng
 import org.json.JSONArray
 import org.json.JSONObject

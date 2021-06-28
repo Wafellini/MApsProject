@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.mapsproject.R
 import com.example.mapsproject.data.APIHelper
+import com.example.mapsproject.data.Country
 import kotlin.properties.Delegates
 
 @Suppress("DEPRECATION")
@@ -30,6 +31,10 @@ class LauncherActivity : AppCompatActivity() {
     var id by Delegates.notNull<Int>()
     val delay: Long = 200
     val handler: Handler = Handler()
+
+    companion object{
+        val COUNTRIES = ArrayList<Country>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

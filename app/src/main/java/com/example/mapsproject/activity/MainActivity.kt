@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         profile = findViewById(R.id.profile)
         profile_data = findViewById(R.id.profile_data)
 
-        USER = User(intent.getStringExtra("login")!!)
-
         play.setOnClickListener{
             openMapActivity()
         }
@@ -60,10 +58,5 @@ class MainActivity : AppCompatActivity() {
         } else{
             profile_data.visibility = View.GONE
         }
-    }
-
-    companion object{
-        val COUNTRIES = ArrayList<Country>()
-        lateinit var USER: User
     }
 }

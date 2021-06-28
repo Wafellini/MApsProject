@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.mapsproject.R
-import com.example.mapsproject.activity.MainActivity.Companion.COUNTRIES
+import com.example.mapsproject.activity.LauncherActivity.Companion.COUNTRIES
 import com.example.mapsproject.data.Country
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
