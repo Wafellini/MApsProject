@@ -5,13 +5,12 @@ require "init.php";
 $login=$_POST["login"];
 $score=(int)$_POST["score"];
 
-
-$sql_query1="select score from users where login like '$login';";
+$sql_query1="select score from scores where login like '$login';";
 
 $res = mysqli_query($connection,$sql_query1);
 $row = mysqli_fetch_array($res);
 
-if(!$res){
+if(mysqli_num_rows($res)>0){
     if($score > $row[0]){
         $sql_query2="UPDATE scores
                         SET score = '$score'

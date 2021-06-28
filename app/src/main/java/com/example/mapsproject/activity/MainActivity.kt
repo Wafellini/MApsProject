@@ -1,15 +1,13 @@
 package com.example.mapsproject.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import com.example.mapsproject.R
-import com.example.mapsproject.data.Country
-import com.example.mapsproject.data.User
+import com.example.mapsproject.service.BackgroundSoundService
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -34,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         profile = findViewById(R.id.profile)
         profile_data = findViewById(R.id.profile_data)
         options_data = findViewById(R.id.options_data)
+
+        playMusic()
 
         options.setOnClickListener{
             showHideOptions()
@@ -72,5 +72,10 @@ class MainActivity : AppCompatActivity() {
         } else{
             options_data.visibility = View.GONE
         }
+    }
+
+    fun playMusic(){
+        val intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
+        startService(intent)
     }
 }

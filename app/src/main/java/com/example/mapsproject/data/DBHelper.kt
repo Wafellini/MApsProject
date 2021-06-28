@@ -9,10 +9,10 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.Toast
-import com.example.mapsproject.activity.LauncherActivity
-import com.example.mapsproject.activity.LoginActivity
-import com.example.mapsproject.activity.MapActivity
-import com.example.mapsproject.activity.RegisterActivity
+import androidx.fragment.app.FragmentActivity
+import com.example.mapsproject.activity.*
+import com.example.mapsproject.activity.LoginActivity.Companion.USER
+import com.example.mapsproject.fragment.ProfileFragment
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -150,6 +150,47 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+        } else if (method == "get best") {
+            val login = params[1]
+            lateinit var response: String
+            val log_url = ip+"getbest.php"
+            try {
+                val url = URL(log_url)
+                HttpsTrustManager.allowAllSSL()
+                val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
+
+                httpURLConnection.requestMethod = "POST"
+                httpURLConnection.doOutput = true
+                val os: OutputStream = httpURLConnection.outputStream
+                val bufferedWriter = BufferedWriter(OutputStreamWriter(os, "UTF-8"))
+                val data: String =
+                    URLEncoder.encode("login", "UTF-8").toString() + "=" + URLEncoder.encode(
+                        login, "UTF-8"
+                    )
+
+                bufferedWriter.write(data)
+                bufferedWriter.flush()
+                bufferedWriter.close()
+                os.close()
+
+                val `is`: InputStream = httpURLConnection.inputStream
+                val bufferedReader = BufferedReader(InputStreamReader(`is`))
+
+                try {
+                    while ((bufferedReader.readLine().also { response = it }) != null) {
+                    }
+                } catch (e: Exception) {
+                }
+                Log.i("aa",response)
+                bufferedReader.close()
+                `is`.close()
+                httpURLConnection.disconnect()
+                return response
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
         return null
     }
@@ -165,6 +206,8 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
             activity.openLoginActivity()
         } else if (method == "register" && result == "Error") {
             Toast.makeText(activity.applicationContext, "Database Error", Toast.LENGTH_SHORT).show()
+        } else if (method == "get best") {
+            ProfileFragment.setBest(result!!)
         }
     }
 
