@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,25 +11,26 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/lsensor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Light sensor Off"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+        <!--        <Switch-->
+        <!--            android:id="@+id/lsensor"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:text="Light sensor Off"-->
+        <!--            tools:ignore="UseSwitchCompatOrMaterialXml" />-->
 
-        <Switch
-            android:id="@+id/dmode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Light mode"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+        <!--        <Switch-->
+        <!--            android:id="@+id/dmode"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Light mode"-->
+        <!--            tools:ignore="UseSwitchCompatOrMaterialXml" />-->
 
         <ImageView
             android:id="@+id/iv_nmute"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
             app:srcCompat="@drawable/ic_nmute" />
 
@@ -38,9 +38,10 @@
             android:id="@+id/iv_mute"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_mute"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_mute" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,19 @@
 package com.example.mapsproject.activity
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import com.example.mapsproject.R
 import com.example.mapsproject.service.BackgroundSoundService
+
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         actionBar?.hide()
         supportActionBar?.hide()
@@ -39,19 +44,19 @@ class MainActivity : AppCompatActivity() {
 
         playMusic()
 
-        options.setOnClickListener{
+        options.setOnClickListener {
             showHideOptions()
         }
-        play.setOnClickListener{
+        play.setOnClickListener {
             openMapActivity()
         }
-        out.setOnClickListener{
+        out.setOnClickListener {
             openLoginActivity()
         }
         profile.setOnClickListener {
             showHideProfile()
         }
-        rankingButton.setOnClickListener{
+        rankingButton.setOnClickListener {
             openRankingActivity()
         }
     }
@@ -60,33 +65,37 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, MapActivity::class.java)
         startActivity(intent)
     }
+
     fun openLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
+
     fun openRankingActivity() {
         val intent = Intent(this, RankingActivity::class.java)
         startActivity(intent)
     }
 
-    fun showHideProfile(){
-        if (profile_data.visibility == View.GONE){
+    fun showHideProfile() {
+        if (profile_data.visibility == View.GONE) {
             profile_data.visibility = View.VISIBLE
-        } else{
+        } else {
             profile_data.visibility = View.GONE
         }
     }
-    fun showHideOptions(){
-        if (options_data.visibility == View.GONE){
+
+    fun showHideOptions() {
+        if (options_data.visibility == View.GONE) {
             options_data.visibility = View.VISIBLE
-        } else{
+        } else {
             options_data.visibility = View.GONE
         }
     }
 
-    fun playMusic(){
+    fun playMusic() {
         val intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
         startService(intent)
     }
+
 }
