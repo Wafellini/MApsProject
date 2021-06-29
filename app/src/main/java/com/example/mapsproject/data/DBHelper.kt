@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.example.mapsproject.activity.*
 import com.example.mapsproject.activity.LoginActivity.Companion.USER
+import com.example.mapsproject.activity.RankingActivity.Companion.RANKING
 import com.example.mapsproject.fragment.ProfileFragment
 import java.io.*
 import java.net.HttpURLConnection
@@ -181,6 +182,34 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
                     }
                 } catch (e: Exception) {
                 }
+                bufferedReader.close()
+                `is`.close()
+                httpURLConnection.disconnect()
+                return response
+            } catch (e: MalformedURLException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        } else if (method == "get ranking") {
+            lateinit var response: String
+            val log_url = ip+"getranking.php"
+            try {
+                val url = URL(log_url)
+                HttpsTrustManager.allowAllSSL()
+                val httpURLConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
+
+                httpURLConnection.requestMethod = "POST"
+                httpURLConnection.doOutput = true
+
+                val `is`: InputStream = httpURLConnection.inputStream
+                val bufferedReader = BufferedReader(InputStreamReader(`is`))
+
+                try {
+                    while ((bufferedReader.readLine().also { response = it }) != null) {
+                    }
+                } catch (e: Exception) {
+                }
                 Log.i("aa",response)
                 bufferedReader.close()
                 `is`.close()
@@ -199,15 +228,27 @@ class DBHelper(private val activity: Activity) : AsyncTask<String?, Void?, Strin
         if (method == "login" && result == "Success" && activity is LoginActivity) {
             Toast.makeText(activity.applicationContext, "Success", Toast.LENGTH_SHORT).show()
             activity.openMainActivity()
-        } else if (method == "login" && result == "Error") {
+        } else if (method == "login" && result == "Error" && activity is LoginActivity) {
             Toast.makeText(activity.applicationContext, "Error", Toast.LENGTH_SHORT).show()
+            LoginActivity.reanable()
         } else if (method == "register" && result == "Success" && activity is RegisterActivity) {
             Toast.makeText(activity.applicationContext, "Success", Toast.LENGTH_SHORT).show()
             activity.openLoginActivity()
-        } else if (method == "register" && result == "Error") {
+        } else if (method == "register" && result == "Error" && activity is RegisterActivity) {
             Toast.makeText(activity.applicationContext, "Database Error", Toast.LENGTH_SHORT).show()
+            RegisterActivity.reanable()
         } else if (method == "get best") {
             ProfileFragment.setBest(result!!)
+        } else if (method == "get ranking" && activity is RankingActivity) {
+            for (r in result!!.split(";")){
+                try {
+                    val x = r.split(",")
+                    RANKING[x[0]] = x[1].toInt()
+                } catch (e: Exception){
+                    break
+                }
+            }
+            activity.setRanking()
         }
     }
 
